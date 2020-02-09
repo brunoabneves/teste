@@ -52,7 +52,7 @@ Partial Class _Default
     Private Sub Salvar()
         Dim objAluno As New Aluno(ViewState("Codigo"))
         With objAluno
-            .NomeAluno = Trim(Validacao.RetirarEspacos(txtNome.Text)) + txtSobrenome.Text
+            .NomeAluno = txtNome.Text + " " + txtSobrenome.Text
             If VerificarCpf() = True Then
                 Exit Sub
             End If
@@ -116,9 +116,11 @@ Partial Class _Default
 
 #Region "Eventos de Listagem"
     Protected Sub grdAluno_RowCommand(ByVal source As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles grdAluno.RowCommand
+        Dim IdDoc As New Documento
         If e.CommandName = "" Then
             Response.Redirect(Request.Url.ToString)
         ElseIf e.CommandName = "EXCLUIR" Then
+            IdDoc.Excluir(IdDoc.ObterIdDoc(grdAluno.DataKeys(e.CommandArgument).Item(0)))  'Exclui do documento do aluno
             Excluir(grdAluno.DataKeys(e.CommandArgument).Item(0))
         End If
     End Sub

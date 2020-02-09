@@ -1,6 +1,6 @@
 Imports Microsoft.VisualBasic
 Imports System.Data
-Imports System.Data.SqlClient        
+Imports System.Data.SqlClient
 Imports System.Configuration
 Imports System.Text
 Imports System.IO.Path

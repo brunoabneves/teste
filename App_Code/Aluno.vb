@@ -241,11 +241,10 @@ Public Class Aluno
         Dim strSQL As New StringBuilder
 
         strSQL.Append(" select CI01_ID_ALUNO as CODIGO, CI01_NM_ALUNO as DESCRICAO")
-        strSQL.Append(" from CI01_ALUNO")
+        strSQL.Append(" from CI01_ALUNO order by CI01_NM_ALUNO ASC")
 
         dt = cnn.AbrirDataTable(strSQL.ToString)
 
-        '
         cnn = Nothing
 
         Return dt
@@ -266,7 +265,6 @@ Public Class Aluno
             End If
         End With
 
-        '
         cnn = Nothing
 
         Return CodigoUltimo
@@ -284,10 +282,33 @@ Public Class Aluno
 
         LinhasAfetadas = cnn.ExecutarSQL(strSQL.ToString)
 
-        '
         cnn = Nothing
 
         Return LinhasAfetadas
+    End Function
+
+    'Fiz agora
+    Public Function ObterIdAluno(ByVal Nome As String) As Integer
+        Dim cnn As New Conexao
+
+        Dim dt As Integer
+        Dim strSQL As New StringBuilder
+
+        strSQL.Append(" select CI01_ID_ALUNO as CODIGO")
+        strSQL.Append(" from CI01_ALUNO")
+        strSQL.Append(" where CI01_NM_ALUNO = '" + Nome + "'")
+
+        With cnn.AbrirDataTable(strSQL.ToString)
+            If Not IsDBNull(.Rows(0)(0)) Then
+                dt = .Rows(0)(0)
+            Else
+                dt = 0
+            End If
+        End With
+
+        cnn = Nothing
+
+        Return dt
     End Function
 
 End Class

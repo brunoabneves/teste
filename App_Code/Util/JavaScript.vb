@@ -91,6 +91,7 @@ Public Module JavaScript
         ENVIAR = 5
         APROVADO = 6
         NAO_APROVADO = 7
+        ATUALIZAR = 8
     End Enum
 
     Public Sub ExibirConfirmacao(ByVal Botao As Object, ByVal TipoConfirmacao As eTipoConfirmacao)
